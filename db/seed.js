@@ -135,6 +135,8 @@ async function createInitialPosts() {
   }
 }
 
+
+//DataBase Testing and Re-building
 async function rebuildDB() {
   try {
     client.connect();
@@ -148,7 +150,6 @@ async function rebuildDB() {
      throw error;
   }
 }
-
 
 async function testDB() {
   try {
