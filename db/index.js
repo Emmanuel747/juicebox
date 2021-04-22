@@ -261,8 +261,8 @@ async function addTagsToPost(postId, tagList) {
 
     return await getPostById(postId);
   } catch (error) {
-      console.log(error);
-      throw error;
+    console.log(error);
+    throw error;
   }
 }
 
@@ -312,6 +312,25 @@ async function getPostById(postId) {
   }
 }
 
+
+async function getAllTags() {
+  try {
+    const { rows: tags} = await client.query(`
+      SELECT *
+      FROM tags;
+    `);
+
+    // const tags = await Promise.all(
+    //   postIds.map((post) => getPostById(post.id))
+    // );
+    console.log("I Ran")
+    return tags;
+  } catch (error) {
+      console.log(error);
+      throw error;
+  }
+}
+
 async function getPostsByTagName(tagName) {
   try {
     const { rows: postIds } = await client.query(
@@ -347,4 +366,5 @@ module.exports = {
   addTagsToPost,
   getPostById,
   getPostsByTagName,
+  getAllTags,
 };
