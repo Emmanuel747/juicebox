@@ -1,7 +1,7 @@
 const express = require('express');
 const apiRouter = express.Router();
 
-server.use(async (req, res, next) => {
+apiRouter.use(async (req, res, next) => {
    const prefix = 'Bearer '
    const auth = req.headers['Authorization'];
  
@@ -25,6 +25,8 @@ server.use(async (req, res, next) => {
  
        next();
      } catch (error) {
+        res.send({error})
+        console.log(error)
        // there are a few types of errors here
      }
    }
