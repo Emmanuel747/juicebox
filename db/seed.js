@@ -77,7 +77,7 @@ async function createInitialUsers() {
     console.log("Starting to create users...");
 
     await createUser({ 
-      username: 'zxeman  ', 
+      username: 'zxeman', 
       password: 'manny21',
       name: 'Eman',
       location: 'Baton Rouge, LA' 
@@ -93,6 +93,12 @@ async function createInitialUsers() {
       password: 'poochi21',
       name: 'Poochi',
       location: 'Tik Tok, Her Phone'
+    });
+    await createUser({ 
+      username: 'albert',
+      password: 'p',
+      name: 'OldGuy',
+      location: 'Office Desk'
     });
 
     console.log("Finished creating users!");
