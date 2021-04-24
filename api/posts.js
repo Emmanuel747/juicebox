@@ -15,14 +15,29 @@ postsRouter.use((req, res, next) => {
    // res.send({ message: 'DevJobz GET Post request is being made to /posts!' });
    next();
 });
-postsRouter.get('/', async (req, res) => {
-   const posts = await getAllPosts();
 
-   res.send({
-      message: 'DevJobz GET Post request is being made to /posts!',
+postsRouter.get('/', async (req, res) => {
+	let posts;
+	try {
+
+		const allPosts = await getAllPosts();
+		if (req.user) {
+			posts	= allPosts.filter(post => {
+				return req.user && post.author.id === req.user.id
+			});
+		} else {
+			posts = allPosts.filter(post => {
+				return post.active
+			});
+		}
+
+		res.send({
       posts: posts
    })
-   next();
+
+	} catch ({name, message}) {
+		next({name, message});
+	}
 });
 
 postsRouter.post('/', requireUser, async (req, res, next) => {
@@ -49,15 +64,10 @@ postsRouter.post('/', requireUser, async (req, res, next) => {
   
     // if the post comes back, res.send({ post });
     if (post) {
-       res.send({
-         posts: post
-       })
-    } else {
-       res.send({
-          error: error + "No post were found"
-       })
-    }
-    // otherwise, next an appropriate error object 
+      res.send({
+        posts: post
+      })
+		}
   } catch ({ name, message }) {
     next({ name, message });
   }
