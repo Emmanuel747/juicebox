@@ -21,10 +21,20 @@ tagsRouter.get('/', async (req, res) => {
 });
 
 tagsRouter.get('/:tagName/posts', async (req, res, next) => {
+   let taggedPosts;
    const { tagName } = req.params;
-
    try {
-     const taggedPosts = await getPostsByTagName(tagName)
+     const allTaggedPosts = await getPostsByTagName(tagName)
+     if (req.user) {
+      taggedPosts	= allTaggedPosts.filter(post => {
+         return req.user && post.author.id === req.user.id
+      });
+   } else {
+      taggedPosts = allTaggedPosts.filter(post => {
+         return post.active
+      });
+   }
+
      res.send({
         posts: taggedPosts
      })
