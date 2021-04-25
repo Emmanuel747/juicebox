@@ -89,6 +89,21 @@ async function getUserById(userId) {
   }
 }
 
+async function getUserByUsername(username) {
+  try {
+    const { rows: [user] } = await client.query(`
+      SELECT *
+      FROM users
+      WHERE username=$1;
+    `, [username]);
+
+    return user;
+  } catch (error) {
+    throw error;
+  }
+}
+
+
 //POST Methods
 async function createPost({
   authorId,
@@ -313,7 +328,6 @@ async function getPostById(postId) {
   }
 }
 
-
 async function getAllTags() {
   try {
     const { rows: tags} = await client.query(`
@@ -346,20 +360,6 @@ async function getPostsByTagName(tagName) {
   } catch (error) {
       console.log(error);
       throw error;
-  }
-}
-
-async function getUserByUsername(username) {
-  try {
-    const { rows: [user] } = await client.query(`
-      SELECT *
-      FROM users
-      WHERE username=$1;
-    `, [username]);
-
-    return user;
-  } catch (error) {
-    throw error;
   }
 }
 
