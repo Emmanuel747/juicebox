@@ -1,0 +1,323 @@
+{
+	"info": {
+		"_postman_id": "0eec2084-0c7f-4c76-a687-d5197e7c46ca",
+		"name": "DevJobz - Request Commands",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "All Posts (!Auth) - LocalHost",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true,
+				"disabledSystemHeaders": {
+					"content-length": true,
+					"content-type": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"title\": \"I still do not like tags\", \"content\": \"CMON! why do people use them?\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register - LocalHost",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"iron\", \r\n    \"password\": \"man\", \r\n    \"name\": \"IronMan\",\r\n    \"location\": \"Avengers Tower\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/users/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login - LocalHost",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"username\": \"poochi\", \"password\": \"poochi21\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreatePost -  LocalHost",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidXNlcm5hbWUiOnsiaWQiOjIsInVzZXJuYW1lIjoicGFubmR5IiwicGFzc3dvcmQiOiJwYW5uZHkyMSIsIm5hbWUiOiJDYW5keSBBbmR5IiwibG9jYXRpb24iOiJTdW1tb25lcnMgUmlmdCwgTGVhZ3VlIiwiYWN0aXZlIjp0cnVlfSwiaWF0IjoxNjE5MzY2MDA0fQ.WDf0NF9dJuiX0H7EQA9EH92TBi0tSOgBlGzGK3KdOUE"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \"title\": \"wow curl commands OP?\", \"content\": \"Finally got postman to work?\", \"tags\": \"#timeToSleep\"}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"posts"
+					]
+				},
+				"description": "imported CURL command from file > import > raw (text)\r\n\r\nTo get a response from my local api."
+			},
+			"response": []
+		},
+		{
+			"name": "Find - Posts by  TagName",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOnsiaWQiOjMsInVzZXJuYW1lIjoicG9vY2hpIiwicGFzc3dvcmQiOiJwb29jaGkyMSIsIm5hbWUiOiJQb29jaGkiLCJsb2NhdGlvbiI6IlRpayBUb2ssIEhlciBQaG9uZSIsImFjdGl2ZSI6dHJ1ZX0sImlhdCI6MTYxOTI0NjEzM30.dahKRdcg-8KGhc_6Q_qI_1NVgXXam69qZ0nMBPCa7gY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/tags/%23oldisnewagain/posts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"tags",
+						"%23oldisnewagain",
+						"posts"
+					]
+				},
+				"description": "use %23 for # in URL "
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Post - LocalHost",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOnsiaWQiOjMsInVzZXJuYW1lIjoicG9vY2hpIiwicGFzc3dvcmQiOiJwb29jaGkyMSIsIm5hbWUiOiJQb29jaGkiLCJsb2NhdGlvbiI6IlRpayBUb2ssIEhlciBQaG9uZSIsImFjdGl2ZSI6dHJ1ZX0sImlhdCI6MTYxOTI0MzM0Nn0.jPd9PUG2-9B4Ryo6MMiCvY8ZkYduHvbbmIfOd75VDKs",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/posts/25",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"posts",
+						"25"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete/Patch - UserAcc",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOnsiaWQiOjMsInVzZXJuYW1lIjoicG9vY2hpIiwicGFzc3dvcmQiOiJwb29jaGkyMSIsIm5hbWUiOiJQb29jaGkiLCJsb2NhdGlvbiI6IlRpayBUb2ssIEhlciBQaG9uZSIsImFjdGl2ZSI6ZmFsc2V9LCJpYXQiOjE2MTkzNjg1NjV9.xZywbl9C4cCdF5w5tvokP04InKew5NCVCMjb4jzU6zY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/users/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"3"
+					]
+				},
+				"description": "Same request route and Headers. \r\nSelect PATCH or DELETE right side of URL."
+			},
+			"response": []
+		},
+		{
+			"name": "Ping API Midware - LocalHost",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOnsiaWQiOjMsInVzZXJuYW1lIjoicG9vY2hpIiwicGFzc3dvcmQiOiJwb29jaGkyMSIsIm5hbWUiOiJQb29jaGkiLCJsb2NhdGlvbiI6IlRpayBUb2ssIEhlciBQaG9uZSIsImFjdGl2ZSI6dHJ1ZX0sImlhdCI6MTYxOTEzMzczM30.OSCSqinZD_MBJQctoHtRaLY2AqZDOp4CV3PPfWiIKtU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/api",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
