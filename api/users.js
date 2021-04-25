@@ -2,15 +2,19 @@
 const express = require('express');
 const usersRouter = express.Router();
 const jwt = require('jsonwebtoken');
+const { requireUser } = require('./utils');
+const { 
+  getAllUsers,
+  getUserById,
+  updateUser,
+  getUserByUsername,
+  createUser
+ } = require('../db');
 
-const { getAllUsers } = require('../db');
-const { getUserByUsername } = require('../db');
-const { createUser } = require('../db')
 
 usersRouter.use((req, res, next) => {
   console.log("A request is being made to /users");
-
-  next(); // THIS IS DIFFERENT
+  next();
 });
 
 usersRouter.get('/', async (req, res) => {
@@ -63,7 +67,7 @@ usersRouter.post('/register', async (req, res, next) => {
  
      if (_user) {
        next({
-         name: 'UserExistsError',
+         name: 'User-Exists Error',
          message: 'A user by that username already exists'
        });
      }
@@ -91,4 +95,64 @@ usersRouter.post('/register', async (req, res, next) => {
    } 
 });
 
+usersRouter.delete('/:userId', requireUser, async (req, res, next) => {
+  const { userId } = req.params;
+  const { username, active } = req.user;
+  try {
+    const targetUser = await getUserById(userId);
+
+    if ( !targetUser.active ) {
+      res.send({
+        name: 'InactiveUserError',
+        message: 'This user has already been deleted'
+      })
+    } else if ( username !== targetUser.username) {
+      res.send({
+        name: 'Unauthorized User Error',
+        message: 'You cannot delete a user-account that is not yours'
+      })
+    } else {
+      const newFields = {active: false} 
+      await updateUser(userId, newFields)
+      res.send({
+        name: "Success!",
+        message: ` User: ${targetUser.username}, has been Deleted.`
+      })
+    }
+
+  } catch ({ name, message }) {
+    next({name, message})
+  }
+});
+
+usersRouter.patch('/:userId', requireUser, async (req, res, next) => {
+  console.log("Account re-activation request is being made..")
+  const { userId } = req.params;
+  const { id, active } = req.user;
+  try {
+    const targetUser = await getUserById(userId);
+
+    if ( userId == id && !targetUser.active ) {
+      const newFields = {active: true} 
+      await updateUser(userId, newFields)
+      res.send({
+        name: "Success!",
+        message: ` User: ${targetUser.username}, has been Reinstated.`
+      })
+    } else if (userId == id && active ) {
+      res.send({
+        name: "Active User Error",
+        message: "This user is already active"
+      })
+    } else {
+      console.log("...Authorization Error  " + id + " vs " + userId)
+      res.send({
+        name: "Authorization Error",
+        message: "You can't reinstate a user-account that is not yours'"
+      })
+    }
+  } catch ({name, message}) {
+    next({name, message})
+  }
+});
 module.exports = usersRouter;

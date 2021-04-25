@@ -75,25 +75,29 @@ async function createInitialUsers() {
       username: 'zxeman', 
       password: 'manny21',
       name: 'Eman',
-      location: 'Baton Rouge, LA' 
+      location: 'Baton Rouge, LA',
+      active: true
     });
     await createUser({ 
       username: 'panndy', 
       password: 'panndy21',
       name: 'Candy Andy',
-      location: 'Summoners Rift, League'
+      location: 'Summoners Rift, League',
+      active: true
     });
     await createUser({ 
       username: 'poochi',
       password: 'poochi21',
       name: 'Poochi',
-      location: 'Tik Tok, Her Phone'
+      location: 'Tik Tok, Her Phone',
+      active: true
     });
     await createUser({ 
       username: 'albert',
       password: 'p',
       name: 'OldGuy',
-      location: 'Office Desk'
+      location: 'Office Desk',
+      active: true
     });
 
     console.log("Finished creating users!");

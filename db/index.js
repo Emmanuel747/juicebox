@@ -194,8 +194,7 @@ async function getAllPosts() {
     return posts;
   } catch (error) {
       console.log(error);
-        console.log(error);
-        throw error;
+      throw error;
   }
 }
 
@@ -309,7 +308,7 @@ async function getPostById(postId) {
       rows: [author],
     } = await client.query(
       `
-      SELECT id, username, name, location
+      SELECT id, username, name, location, active
       FROM users
       WHERE id=$1;
     `,

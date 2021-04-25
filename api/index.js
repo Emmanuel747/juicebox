@@ -18,8 +18,15 @@ apiRouter.use(async (req, res, next) => {
 
       if (id) {
         req.user = await getUserById(id);
+        if (!req.user) {
+          next({
+            name: "Token invalid Error",
+            message: "Authorization Token is invalid or has expired"
+          })
+        }
         next();
       }
+
     } catch ({ name, message }) {
       next({ name, message });
     }
