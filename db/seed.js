@@ -7,17 +7,12 @@ const {
   createPost,
   updatePost,
   getAllPosts,
-  getPostsByUser,
-  createTags,
-  createPostTag,
-  addTagsToPost,
-  getPostById,
-  getPostsByTagName,
+  getPostsByTagName
 } = require("./index");
 
 async function dropTables() {
   try {
-    console.log("Starting to drop tables...");
+    console.log("Dropping tables...");
 
     // have to make sure to drop in correct order
     await client.query(`
@@ -142,7 +137,7 @@ async function createInitialPosts() {
 }
 
 
-//DataBase Testing and Re-building
+//Database Testing and Re-building
 async function rebuildDB() {
   try {
     client.connect();

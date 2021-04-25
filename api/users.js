@@ -10,7 +10,6 @@ const { createUser } = require('../db')
 usersRouter.use((req, res, next) => {
   console.log("A request is being made to /users");
 
-//   res.send({ message: 'Welcome Emmanuel, Server says hello from /users!' });
   next(); // THIS IS DIFFERENT
 });
 
@@ -90,7 +89,6 @@ usersRouter.post('/register', async (req, res, next) => {
    } catch ({ name, message }) {
      next({ name, message })
    } 
- });
+});
 
- 
 module.exports = usersRouter;

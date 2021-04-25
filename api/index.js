@@ -1,17 +1,14 @@
 const express = require('express');
 const apiRouter = express.Router();
-
-// Before we start attaching our routers
 const jwt = require('jsonwebtoken');
 const { getUserById } = require('../db');
 const { JWT_SECRET } = process.env;
 
-// set `req.user` if possible
 apiRouter.use(async (req, res, next) => {
    const auth = req.header('Authorization');
    const prefix = 'Bearer ';
 
-  if (!auth) { // nothing to see here
+  if (!auth) {
     next();
   } else if (auth.startsWith(prefix)) {
     const token = auth.slice(prefix.length);
@@ -40,7 +37,7 @@ apiRouter.use((req, res, next) => {
    }
  
    next();
- }); 
+}); 
 
 const usersRouter = require('./users');
 apiRouter.use('/users', usersRouter);
@@ -51,7 +48,7 @@ apiRouter.use('/posts', userPosts)
 const userTags = require('./tags');
 apiRouter.use('/tags', userTags);
 
-//-----Error Handler-----
+//-----Error Handler-----//
 apiRouter.use((error, req, res, next) => {
    res.send(error);
 });

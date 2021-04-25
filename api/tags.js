@@ -39,7 +39,7 @@ tagsRouter.get('/:tagName/posts', async (req, res, next) => {
         posts: taggedPosts
      })
    } catch ({ name, message }) {
-    next({name, message})
+      next({name, message})
    }
  });
 

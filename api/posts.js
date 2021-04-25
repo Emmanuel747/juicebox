@@ -8,11 +8,10 @@ const {
    getPostById 
 } = require('../db');
 
-
+//Middleware
 postsRouter.use((req, res, next) => {
    console.log("A request is being made to /posts");
 
-   // res.send({ message: 'DevJobz GET Post request is being made to /posts!' });
    next();
 });
 
@@ -46,23 +45,19 @@ postsRouter.post('/', requireUser, async (req, res, next) => {
   const tagArr = tags.trim().split(/\s+/)
   const postData = {};
 
-  // only send the tags if there are some to send
    if (tagArr.length) {
       postData.tags = tagArr;
    }
 
   try {
-   // const _user = await getUserByUsername(req.user.username);
     // add authorId, title, content to postData object
     postData.authorId = id;
     postData.title = title;
     postData.content = content;
     postData.tags;
 
-   // this will create the post and the tags for us
     const post = await createPost(postData);
   
-    // if the post comes back, res.send({ post });
     if (post) {
       res.send({
         posts: post
@@ -117,7 +112,6 @@ postsRouter.delete('/:postId', requireUser, async (req, res, next) => {
  
        res.send({ post: updatedPost });
      } else {
-       // if there was a post, throw UnauthorizedUserError, otherwise throw PostNotFoundError
        next(post ? { 
          name: "UnauthorizedUserError",
          message: "You cannot delete a post which is not yours"
@@ -126,7 +120,6 @@ postsRouter.delete('/:postId', requireUser, async (req, res, next) => {
          message: "That post does not exist"
        });
      }
- 
    } catch ({ name, message }) {
      next({ name, message })
    }
