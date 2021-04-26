@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="./style.css">
+   <title>Eman747 - First API</title>
+</head>
+<body>
+   <div class="Welcome-message">
+      <h1>Welcome to my First API </h1>
+      <span class="sub-message"> 
+         <p><b>C</b>reate - <b>R</b>ead - <b>U</b>pdate - <b>D</b>elete</p> 
+      </span>
+   </div>
+
+   <div class="top section">
+      <h2>Some Quick few API endpoints to try as an Unauthorized User: </h2> 
+      <div>
+         <ul style="list-style-type:none;">
+            <li> 
+               <p><a href="https://eman747-first-crud-api.herokuapp.com/api/posts">Click here</a> 
+                  to GET <b> All Posts </b></p>
+            </li>
+            <li>
+               <P> <b>Terminal Command: &nbsp; </b> 
+                  curl 'https://eman747-first-crud-api.herokuapp.com/api/posts' </P>
+            </li>
+         </ul>
+      </div>
+   
+      <div>
+         <ul style="list-style-type:none;">
+            <li> <a href="https://reqbin.com/c-yxuhqddu">Click here </a> to POST<b>  Login  </b> as Poochi </li>
+            <li>  
+               <P><b>Terminal Command: &nbsp;</b> 
+                  curl https://something-31315.herokuapp.com/api/users/login -H "Content-Type: application/json" -X POST -d '{"username": "poochi", "password": "poochi21"}'
+               </P> 
+            </li>
+         </ul>
+      </div>
+   
+      <div>
+         <ul style="list-style-type:none;">
+            <li> <a href="https://reqbin.com/c-qfocq0ov">Click here</a> to GET All Post tagged <b><i>#happy</i></b></li>
+            <li>   
+               <P><b> Terminal Command: &nbsp;</b> 
+                  curl https://something-31315.herokuapp.com/api/tags/%23happy/posts  
+               </P>
+            </li>
+         </ul>
+      </div>
+   </div>
+   
+   <div class="bottom section">
+     <h2>There are many More API endpoints to try as an Authorized User: </h2> 
+      <ul> 
+         <h3>Create and Delete Post Request - HEADERS: Authorization Bearer TOKEN, Content-Type: application/json </h3>
+         <li>Example: curl https://eman747-first-crud-api.herokuapp.com/api/posts -H 'Authorization: Bearer TOKEN'</li>
+         <li> GET &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; 
+                     https://eman747-first-crud-api.herokuapp.com/api/posts -H 'Authorization: Bearer TOKEN'</li>
+         <li> CREATE https://eman747-first-crud-api.herokuapp.com/api/posts</li>
+         <li> DELETE https://eman747-first-crud-api.herokuapp.com/api/posts/:postId</li>
+      </ul>
+      <ul>
+         <h3>Create and Disable Personal User Account - HEADERS: Authorization Bearer TOKEN, Content-Type: application/json </h3>
+         <li> DELETE https://eman747-first-crud-api.herokuapp.com/api/users/:userId </li>
+         <li> PATCH https://eman747-first-crud-api.herokuapp.com/api/users/:userId -X PATCH -H 'Authorization: Bearer TOKEN' -H 'Content-Type: application/json' -d '{"title": "Creativity is Beautiful", "content": "Creativity is intelligence having fun.", "tags": "#freshDev"}' </li>
+      </ul>
+   </div>
+</body>
+</html>

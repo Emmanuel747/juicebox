@@ -2,6 +2,7 @@ require('dotenv').config();
 const { PORT = 3000 } = process.env;
 const express = require('express');
 const server = express();
+server.use(express.static('public'));
 const morgan = require('morgan');
 server.use(morgan('dev'));
 const bodyParser = require('body-parser');
@@ -19,6 +20,7 @@ server.use((req, res, next) => {
 });
 const apiRouter = require('./api');
 server.use('/api', apiRouter);
+
 
 server.get('/add/:first/to/:second', (req, res, next) => {
    res.send(`<h1>${ req.params.first } + ${ req.params.second } = ${
